@@ -35,7 +35,7 @@ def mage_pages_from_large_image(input_png, output_left_pdf, output_right_pdf):
     # Crop left and right pages with bleed
     left_page = img.crop((0, 0, PAGE_WIDTH, PAGE_HEIGHT))
     right_page = img.crop((PAGE_WIDTH, 0, total_width, PAGE_HEIGHT))
-    
+
     save_pdf(left_page, output_left_pdf)
     save_pdf(right_page, output_right_pdf)
     print_confirmation(output_left_pdf)
@@ -76,5 +76,5 @@ def compress_pdf(path):
         "-dPDFSETTINGS=/ebook",  # or /screen, /printer
         "-dNOPAUSE", "-dQUIET", "-dBATCH",
         f"-sOutputFile={newpath}", path
-    ])
+    ], check=True)
     print_confirmation(newpath)

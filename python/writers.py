@@ -5,12 +5,12 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 
 def write_legalese_bottomleft(image, text):
-    width, height = image.size
+    _width, height = image.size
     font = ImageFont.truetype("python/resources/Engine-Regular.otf", 18)  # Smaller font for legal text
     draw = ImageDraw.Draw(image)
 
     # Calculate text size using textbbox
-    text_width, text_height = draw.textbbox((0, 0), text, font=font)[2:]
+    _, text_height = draw.textbbox((0, 0), text, font=font)[2:]
 
     # Set the position at the bottom-left corner with a margin
     margin = 100
@@ -65,13 +65,13 @@ def write_centered_text(image, text, flipped=False):
         start_y += line_height
 
 def write_title(image, text, y_position, color, border_color, text_size):
-    width, height = image.size
+    width, _height = image.size
     draw = ImageDraw.Draw(image)
     font = ImageFont.truetype("python/resources/Engine-Regular.otf", text_size)
 
     # Split and measure
     text_bbox = draw.textbbox((0, 0), text, font=font)
-    text_width, text_height = text_bbox[2] - text_bbox[0], text_bbox[3] - text_bbox[1]
+    text_width, _text_height = text_bbox[2] - text_bbox[0], text_bbox[3] - text_bbox[1]
 
     x_center = width * 3 // 4
     x_text = x_center - text_width // 2
@@ -90,7 +90,7 @@ def write_subtitle(image, text, y_position, color):
 
     # Split and measure
     text_bbox = draw.textbbox((0, 0), text, font=font)
-    text_width, text_height = text_bbox[2] - text_bbox[0], text_bbox[3] - text_bbox[1]
+    text_width, _text_height = text_bbox[2] - text_bbox[0], text_bbox[3] - text_bbox[1]
 
     x_center = width * 3 // 4
     x_text = x_center - text_width // 2
@@ -107,7 +107,7 @@ def write_author(image, text, y_position, color):
 
     # Split and measure
     text_bbox = draw.textbbox((0, 0), text, font=font)
-    text_width, text_height = text_bbox[2] - text_bbox[0], text_bbox[3] - text_bbox[1]
+    text_width, _text_height = text_bbox[2] - text_bbox[0], text_bbox[3] - text_bbox[1]
 
     x_center = width * 3 // 4
     x_text = x_center - text_width // 2
@@ -131,7 +131,7 @@ def write_summary(image, text, color):
     paragraphs = text.split('\\n')
     lines = []
     draw_tmp = ImageDraw.Draw(image)
-    
+
     for paragraph in paragraphs:
         words = paragraph.split()
         line = ""
@@ -144,8 +144,8 @@ def write_summary(image, text, color):
                 lines.append(line)
                 line = word
         lines.append(line)
-    
-    
+
+
     # Total height
     total_h = sum(draw_tmp.textbbox((0, 0), l, font=font)[3] for l in lines)
     start_y = height // 2 - total_h // 2
@@ -175,7 +175,7 @@ def write_summary(image, text, color):
 def write_onomatopae_text(file, instructions, flipped=False):
     match = re.search(r"p(\d+)\.png", file)
     page_num = match.group(1)
-    
+
     for ins in instructions:
         if str(ins.get("page")) != page_num:
             continue

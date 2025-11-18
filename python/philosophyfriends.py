@@ -50,13 +50,13 @@ def parse_onomatopae(path, version):
     fullpath = f"{path}/INPUT/{version}_onomatopae.txt"
     if not os.path.exists(fullpath):
         return instructions
-    
+
     with open(fullpath, "r", encoding="utf-8") as file:
         for line in file:
             line = line.strip()
             if not line or line.startswith("#"):
                 continue
-            
+
             page_part, pos_part, angle_part, color_part, size_part, text_part = line.split(":", 5)
             x, y = map(int, pos_part.split(","))
             instructions.append({
@@ -79,14 +79,17 @@ def resize_wide_image(path, image_name):
 
 def make_inside(path, version, file):
     onomatopae = parse_onomatopae(path, version)
-    for index, line in enumerate(file):
-        image_name = "p" + str(index+1)
+    pages_count = 0
+    for line in file:
+        pages_count += 1
+        index = pages_count - 1
+        image_name = "p" + str(pages_count)
         resize_wide_image(path, f"{image_name}.png")
         generate_wide_page(path, version, f"{image_name}.png", line, index % 2 == 1)
         write_onomatopae_text(f"{path}/{version}/wide_pages/{image_name}.png", onomatopae, index % 2 == 1)
         mage_pages_from_large_image(f"{path}/{version}/wide_pages/{image_name}.png", f"{path}/{version}/split_pages/{image_name}_left.pdf", f"{path}/{version}/split_pages/{image_name}_right.pdf")
 
-    written_pages = index + 1 # +1 because index counts from 0
+    written_pages = pages_count
 
     pdf = PdfWriter()
     pages = 1
@@ -107,7 +110,6 @@ def make_inside(path, version, file):
 def make_cover(path, version):
     resize_wide_image(path, "cover.png")
     image = Image.open(f"{path}/raw_images/cover.png").convert("RGBA")
-    width, height = image.size
 
     with open(f"{path}/INPUT/{version}_cover.txt", "r", encoding="utf-8") as file:
         lines = file.readlines()
@@ -167,7 +169,7 @@ def make_pdf(book, version):
 def make_books():
     base_path = "books/philosophy_friends"
     pairs = []
-    
+
     # Collect all valid (book, lang) pairs
     for book in os.listdir(base_path):
         book_input = os.path.join(base_path, book, "INPUT")
@@ -177,13 +179,13 @@ def make_books():
             lang_file = os.path.join(book_input, f"{lang}.txt")
             if os.path.exists(lang_file):
                 pairs.append((book, lang))
-    
+
     # Show menu
     print("Do you want to regenerate:")
     for i, (book, lang) in enumerate(pairs, 1):
         print(f"{i}. {book}/{lang}")
     choice = input("Enter number to regenerate only that one, or press Enter for all: ").strip()
-    
+
     # Execute
     if choice.isdigit():
         idx = int(choice) - 1
@@ -191,7 +193,7 @@ def make_books():
             book, lang = pairs[idx]
             make_pdf(book, lang)
             return
-    
+
     # Default: regenerate all
     for book, lang in pairs:
         make_pdf(book, lang)
