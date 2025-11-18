@@ -1,5 +1,6 @@
 import math
 import subprocess
+from typing import cast
 
 from common import print_confirmation
 from PIL import Image
@@ -16,7 +17,7 @@ PAGE_HEIGHT=math.ceil((PAGE_HEIGHT_IN + 2 * BLEED_IN) * DPI)+1
 
 BLACK_PAGE = "python/resources/black_8.25_8.25.pdf"
 
-def save_pdf(image, output_pdf, width=PAGE_WIDTH):
+def save_pdf(image: Image.Image, output_pdf: str, width: int = PAGE_WIDTH) -> None:
     conversion = 72 / DPI
     c = canvas.Canvas(output_pdf, pagesize=(math.ceil(width * conversion), math.ceil(PAGE_HEIGHT * conversion)))  # Convert to points
     image = image.convert("RGB")
@@ -26,9 +27,9 @@ def save_pdf(image, output_pdf, width=PAGE_WIDTH):
     c.showPage()
     c.save()
 
-def mage_pages_from_large_image(input_png, output_left_pdf, output_right_pdf):
+def mage_pages_from_large_image(input_png: str, output_left_pdf: str, output_right_pdf: str) -> None:
     # Open the image
-    img = Image.open(input_png)
+    img = cast(Image.Image, Image.open(input_png))
     total_width = 2 * PAGE_WIDTH
     img = img.resize((total_width, PAGE_HEIGHT), Image.Resampling.LANCZOS)
 
@@ -41,14 +42,14 @@ def mage_pages_from_large_image(input_png, output_left_pdf, output_right_pdf):
     print_confirmation(output_left_pdf)
     print_confirmation(output_right_pdf)
 
-def make_pages_for_cover(path):
+def make_pages_for_cover(path: str) -> None:
     input_png = f"{path}/wide_pages/cover.png"
     full_cover_pdf = f"{path}/cover.pdf"
     back_cover_pdf = f"{path}/tmp/back_cover.pdf"
     front_cover_pdf = f"{path}/tmp/front_cover.pdf"
 
     # Open the image
-    img = Image.open(input_png)
+    img = cast(Image.Image, Image.open(input_png))
     total_width = 2 * PAGE_WIDTH
     img = img.resize((total_width, PAGE_HEIGHT), Image.Resampling.LANCZOS)
 
@@ -56,20 +57,20 @@ def make_pages_for_cover(path):
     left_page = img.crop((0, 0, PAGE_WIDTH, PAGE_HEIGHT))
     right_page = img.crop((PAGE_WIDTH, 0, total_width, PAGE_HEIGHT))
 
-    save_pdf(img, full_cover_pdf, width=2.01*PAGE_WIDTH) # 0.01 for the edge
+    save_pdf(img, full_cover_pdf, width=int(2.01 * PAGE_WIDTH))  # 0.01 for the edge
     save_pdf(left_page, back_cover_pdf)
     save_pdf(right_page, front_cover_pdf)
     print_confirmation(full_cover_pdf)
     print_confirmation(back_cover_pdf)
     print_confirmation(front_cover_pdf)
 
-def make_page_from_image(input_png, output_pdf):
-    img = Image.open(input_png)
+def make_page_from_image(input_png: str, output_pdf: str) -> None:
+    img = cast(Image.Image, Image.open(input_png))
     img = img.resize((PAGE_WIDTH, PAGE_HEIGHT), Image.Resampling.LANCZOS)
     save_pdf(img, output_pdf)
     print_confirmation(output_pdf)
 
-def compress_pdf(path):
+def compress_pdf(path: str) -> None:
     newpath = path.replace(".pdf", "_compressed.pdf")
     subprocess.run([
         "gs", "-sDEVICE=pdfwrite", "-dCompatibilityLevel=1.4",

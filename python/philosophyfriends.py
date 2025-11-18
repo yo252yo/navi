@@ -1,22 +1,24 @@
 import os
+from typing import IO, List, Tuple, cast
 
 from common import print_confirmation
 from pdf_maker import (BLACK_PAGE, compress_pdf, mage_pages_from_large_image,
                        make_page_from_image, make_pages_for_cover)
 from PIL import Image
 from pypdf import PdfWriter
-from writers import (write_author, write_centered_text,
-                     write_legalese_bottomleft, write_onomatopae_text,
-                     write_subtitle, write_summary, write_title)
+from writers import (OnomatopoeiaInstruction, write_author,
+                     write_centered_text, write_legalese_bottomleft,
+                     write_onomatopae_text, write_subtitle, write_summary,
+                     write_title)
 
 IMAGE_DIMENSIONS = (2048, 1024)
 
-def generate_legalese_page(path, version):
+def generate_legalese_page(path: str, version: str) -> None:
     legal_path = f"{path}/INPUT/{version}_legal.txt"
 
     if os.path.exists(legal_path):
         with open(legal_path, "r", encoding="utf-8") as file:
-            text = file.read()
+            text = cast(str, file.read())
     else:
         print(f"!! NO LEGALESE FOR {legal_path} — USING EMPTY STRING.")
         text = ""
@@ -30,7 +32,7 @@ def generate_legalese_page(path, version):
 
     make_page_from_image(f"{path}/{version}/tmp/legal_page.png", f"{path}/{version}/tmp/legal_page.pdf")
 
-def generate_wide_page(path, version, image_name, text, flipped=False):
+def generate_wide_page(path: str, version: str, image_name: str, text: str, flipped: bool = False) -> None:
     image = Image.open(f"{path}/raw_images/" + image_name).convert("RGBA")
     width, height = image.size
 
@@ -45,20 +47,19 @@ def generate_wide_page(path, version, image_name, text, flipped=False):
     image.save(f"{path}/{version}/wide_pages/{image_name}")
     print_confirmation(f"{path}/{version}/wide_pages/{image_name}")
 
-def parse_onomatopae(path, version):
-    instructions = []
+def parse_onomatopae(path: str, version: str) -> List[OnomatopoeiaInstruction]:
+    instructions: List[OnomatopoeiaInstruction] = []
     fullpath = f"{path}/INPUT/{version}_onomatopae.txt"
     if not os.path.exists(fullpath):
         return instructions
 
     with open(fullpath, "r", encoding="utf-8") as file:
         for line in file:
-            line = line.strip()
             if not line or line.startswith("#"):
                 continue
 
             page_part, pos_part, angle_part, color_part, size_part, text_part = line.split(":", 5)
-            x, y = map(int, pos_part.split(","))
+            x, y = cast(Tuple[int, int], tuple(map(int, pos_part.split(","))))
             instructions.append({
                 "page": page_part.strip(),
                 "x": x,
@@ -70,14 +71,14 @@ def parse_onomatopae(path, version):
             })
     return instructions
 
-def resize_wide_image(path, image_name):
+def resize_wide_image(path: str, image_name: str) -> None:
     image = Image.open(f"{path}/INPUT/{image_name}").convert("RGBA")
     resized = image.resize(IMAGE_DIMENSIONS, Image.Resampling.LANCZOS)
 
     resized.save(f"{path}/raw_images/{image_name}")
     print_confirmation(f"{path}/raw_images/{image_name}")
 
-def make_inside(path, version, file):
+def make_inside(path: str, version: str, file: IO[str]) -> None:
     onomatopae = parse_onomatopae(path, version)
     pages_count = 0
     for line in file:
@@ -94,7 +95,7 @@ def make_inside(path, version, file):
     pdf = PdfWriter()
     pages = 1
     pdf.append(f"{path}/{version}/tmp/legal_page.pdf")
-    for i in range(1, written_pages + 1): # +1 because range excludes upper limit
+    for i in range(1, written_pages + 1):  # +1 because range excludes upper limit
         pdf.append(f"{path}/{version}/split_pages/p" + str(i) + "_left.pdf")
         pdf.append(f"{path}/{version}/split_pages/p" + str(i) + "_right.pdf")
         pages += 2
@@ -107,18 +108,18 @@ def make_inside(path, version, file):
     pdf.close()
     print_confirmation(f"{path}/{version}/inside.pdf")
 
-def make_cover(path, version):
+def make_cover(path: str, version: str) -> None:
     resize_wide_image(path, "cover.png")
     image = Image.open(f"{path}/raw_images/cover.png").convert("RGBA")
 
-    with open(f"{path}/INPUT/{version}_cover.txt", "r", encoding="utf-8") as file:
-        lines = file.readlines()
+    with open(f"{path}/INPUT/{version}_cover.txt", "r", encoding="utf-8") as f:
+        lines = cast(List[str], f.readlines())
 
     extra = {}
     for line in lines[2:]:
         if "=" in line:
             key, value = line.strip().split("=", 1)
-            extra[key.strip()] = value.strip()
+            extra[cast(str, key.strip())] = cast(str, value.strip())
 
     subtitle = "La philosophie avec tous mes amis!"
     intro = "POUR LES PLUS GRANDS:\\n-\\n"
@@ -136,7 +137,7 @@ def make_cover(path, version):
     print_confirmation(f"{path}/{version}/wide_pages/cover.png")
     make_pages_for_cover(f"{path}/{version}")
 
-def merge_covers(path, version):
+def merge_covers(path: str, version: str) -> None:
     pdf = PdfWriter()
     pdf.append(f"{path}/{version}/tmp/front_cover.pdf")
     pdf.append(f"{path}/{version}/inside.pdf")
@@ -145,14 +146,14 @@ def merge_covers(path, version):
     pdf.close()
     print_confirmation(f"{path}/{version}/ebook.pdf")
 
-def make_folders(path, version):
+def make_folders(path: str, version: str) -> None:
     os.makedirs(f"{path}/raw_images", exist_ok=True)
     os.makedirs(f"{path}/{version}", exist_ok=True)
     os.makedirs(f"{path}/{version}/wide_pages", exist_ok=True)
     os.makedirs(f"{path}/{version}/tmp", exist_ok=True)
     os.makedirs(f"{path}/{version}/split_pages", exist_ok=True)
 
-def make_pdf(book, version):
+def make_pdf(book: str, version: str) -> None:
     print(f"### GENERATING {book} / {version}")
     path = f"books/philosophy_friends/{book}"
 
@@ -166,7 +167,7 @@ def make_pdf(book, version):
     merge_covers(path, version)
     compress_pdf(f"{path}/{version}/ebook.pdf")
 
-def make_books():
+def make_books() -> None:
     base_path = "books/philosophy_friends"
     pairs = []
 

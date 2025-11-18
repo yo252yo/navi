@@ -1,10 +1,21 @@
 import re
+from typing import List, TypedDict
 
 from common import hex_to_rgba, invert_color
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 
-def write_legalese_bottomleft(image, text):
+class OnomatopoeiaInstruction(TypedDict):
+    page: str
+    x: int
+    y: int
+    angle: float
+    color: str
+    size: int
+    text: str
+
+
+def write_legalese_bottomleft(image: Image.Image, text: str) -> None:
     _width, height = image.size
     font = ImageFont.truetype("python/resources/Engine-Regular.otf", 18)  # Smaller font for legal text
     draw = ImageDraw.Draw(image)
@@ -20,7 +31,7 @@ def write_legalese_bottomleft(image, text):
     # Draw the text in white at the calculated position
     draw.text((text_x, text_y), text, font=font, fill=(255, 255, 255, 255))  # White color
 
-def write_centered_text(image, text, flipped=False):
+def write_centered_text(image: Image.Image, text: str, flipped: bool = False) -> None:
     width, height = image.size
     font = ImageFont.truetype("python/resources/Engine-Regular.otf", 100)
     draw = ImageDraw.Draw(image)
@@ -64,7 +75,7 @@ def write_centered_text(image, text, flipped=False):
         draw.text((offset + margin + text_x, start_y), line, font=font, fill=(0, 0, 0, 255))
         start_y += line_height
 
-def write_title(image, text, y_position, color, border_color, text_size):
+def write_title(image: Image.Image, text: str, y_position: int, color: str, border_color: str, text_size: int) -> None:
     width, _height = image.size
     draw = ImageDraw.Draw(image)
     font = ImageFont.truetype("python/resources/Engine-Regular.otf", text_size)
@@ -83,7 +94,7 @@ def write_title(image, text, y_position, color, border_color, text_size):
     stroke_color = hex_to_rgba(border_color, 255)
     draw.text((x_text, y_text), text, font=font, fill=fill_color, stroke_width=6, stroke_fill=stroke_color)
 
-def write_subtitle(image, text, y_position, color):
+def write_subtitle(image: Image.Image, text: str, y_position: int, color: str) -> None:
     width, height = image.size
     draw = ImageDraw.Draw(image)
     font = ImageFont.truetype("python/resources/Engine-Regular.otf", 50)
@@ -100,7 +111,7 @@ def write_subtitle(image, text, y_position, color):
     fill_color = hex_to_rgba(color, 255)
     draw.text((x_text, y_text), text, font=font, fill=fill_color)
 
-def write_author(image, text, y_position, color):
+def write_author(image: Image.Image, text: str, y_position: int, color: str) -> None:
     width, height = image.size
     draw = ImageDraw.Draw(image)
     font = ImageFont.truetype("python/resources/Engine-Regular.otf", 25)
@@ -117,7 +128,7 @@ def write_author(image, text, y_position, color):
     fill_color = hex_to_rgba(color, 255)
     draw.text((x_text, y_text), text, font=font, fill=fill_color)
 
-def write_summary(image, text, color):
+def write_summary(image: Image.Image, text: str, color: str) -> None:
     width, height = image.size
     font = ImageFont.truetype("python/resources/Engine-Regular.otf", 40)
     fill_color = hex_to_rgba(color, 255)
@@ -172,8 +183,9 @@ def write_summary(image, text, color):
         draw_main.text((x, y), l, font=font, fill=fill_color, stroke_width=1, stroke_fill=halo_color)
         y += line_height
 
-def write_onomatopae_text(file, instructions, flipped=False):
+def write_onomatopae_text(file: str, instructions: List[OnomatopoeiaInstruction], flipped: bool = False) -> None:
     match = re.search(r"p(\d+)\.png", file)
+    assert match is not None
     page_num = match.group(1)
 
     for ins in instructions:
@@ -186,14 +198,14 @@ def write_onomatopae_text(file, instructions, flipped=False):
         text_layer = Image.new("RGBA", image.size, (0, 0, 0, 0))
         draw = ImageDraw.Draw(text_layer)
 
-        x = ins["x"]
+        x: float = ins["x"]
         if flipped:
             x += image.size[0] / 2
 
         # handle line breaks
         lines = ins["text"].split("\\n")
         line_height = font.getbbox("Hg")[3] - font.getbbox("Hg")[1]
-        y = ins["y"]
+        y: float = ins["y"]
         for line in lines:
             draw.text((x, y), line, font=font, fill=ins["color"])
             y += line_height
