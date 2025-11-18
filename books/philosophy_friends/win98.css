@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkMSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KPHN0b3Agc3R5bGU9InN0b3AtY29sb3I6IzAwODA4MDtzdG9wLW9wYWNpdHk6MC4xO3N0b3AtZGRmaW5pdGlvbjowJTsiIG9mZnNldD0iMCI+PHN0b3Agc3R5bGU9InN0b3AtY29sb3I6IzAwODA4MDtzdG9wLW9wYWNpdHk6MC4zO3N0b3AtZGRmaW5pdGlvbjoxMDAlIj48L3N0b3A+PC9saW5lYXJHcmFkaWVudD4KPGNpcmNsZSBjeD0iNTAlIiBjeT0iNTAlIiByPSI1MCUiIHN0eWxlPSJmaWxsOnVybCgjZ3JhZDEpO2ZpbGwtb3BhY2l0eTowLjE7Ij48L2NpcmNsZT4KPC9zdmc+') no-repeat center center fixed;
+    background-size: cover;
+    background-color: #008080;
+    color: #ffffff;
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+    font-size: 12px;
+}
+
+.desktop {
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    overflow: auto;
+}
+
+.icon {
+    display: inline-block;
+    text-align: center;
+    margin: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #ffffff;
+    vertical-align: top;
+}
+
+.icon img {
+    width: 48px;
+    height: 48px;
+    border: none;
+}
+
+.icon span {
+    display: block;
+    margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80px;
+}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Philosophy Friends Library</title>
+    <link rel="stylesheet" href="win98.css">
+</head>
+
+<body>
+    <div class="desktop">
+        {% for book, lang in books %}
+        {% set title = book.title() + " " + lang %}
+        {% set path = book + "/" + lang %}
+        <a href="{{ path }}/reader.html" class="icon">
+            <img src="{{ path }}/thumbnail.png" alt="{{ title }}"><br>
+            <span>{{ title }}</span>
+        </a>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
