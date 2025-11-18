@@ -5,12 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ebook reader</title>
-    <link rel="stylesheet" href="../../../reader.css">
 </head>
 
 <body>
     <div class="container"></div>
-    <script src="../../../reader.js"></script>
+    <script>
+        if (window.location.pathname.endsWith('/books/reader.html')) {
+            window.isTemplate = true;
+            path_prefix = "."
+        } else {
+            window.isTemplate = false;
+            path_prefix = "../../.."
+        }
+
+        const link = Object.assign(document.createElement("link"), {
+            rel: "stylesheet",
+            href: `${path_prefix}/reader.css`,
+        });
+
+        const script = Object.assign(document.createElement("script"), {
+            src: `${path_prefix}/reader.js`,
+        });
+
+        document.body.append(link, script);
+    </script>
 </body>
 
 </html>

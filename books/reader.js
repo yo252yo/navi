@@ -1,3 +1,9 @@
+let BOOK_PREFIX = "";
+
+if (window.isTemplate) {
+    BOOK_PREFIX = 'philosophy_friends/lacan/FR/';
+}
+
 class ComicReader {
     constructor() {
         this.images = [];
@@ -124,13 +130,13 @@ function populate_pages() {
     }
 
     // Auto-discover pages by trying to load images until one fails
-    const pages = ['wide_pages/cover.png'];
+    const pages = [BOOK_PREFIX + 'wide_pages/cover.png'];
     let currentIndex = 1;
     let attemptsRemaining = 50; // Safety limit to prevent infinite loops
 
     const tryLoadPage = (pageIndex) => {
         const img = new Image();
-        const pagePath = `wide_pages/p${pageIndex}.png`;
+        const pagePath = BOOK_PREFIX + `wide_pages/p${pageIndex}.png`;
 
         img.onload = () => {
             // Page exists, add it and try the next one
@@ -161,11 +167,9 @@ function populate_pages() {
     tryLoadPage(currentIndex);
 }
 
-// Initialize the reader when the page loads (only if no populate_pages was called)
-document.addEventListener('DOMContentLoaded', () => {
-    if (!readerInstance) {
-        readerInstance = new ComicReader();
-        readerInstance.init();
-        populate_pages();
-    }
-});
+if (!readerInstance) {
+    readerInstance = new ComicReader();
+    readerInstance.init();
+}
+
+populate_pages();
