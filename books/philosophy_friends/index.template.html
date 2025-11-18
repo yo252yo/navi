@@ -10,7 +10,7 @@
 
 <body>
     <div class="desktop">
-        {% for book, lang in books %}
+        {% for book, lang in var["philsoophy_friends_books"] %}
         {% set title = book.title() + " " + lang %}
         {% set path = book + "/" + lang %}
         <a href="{{ path }}/reader.html" class="icon">
