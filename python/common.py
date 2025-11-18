@@ -1,5 +1,7 @@
 from typing import Tuple
 
+LANGUAGES = ["EN", "FR"]
+
 
 def print_confirmation(file: str) -> None:
     print(f". {file}")

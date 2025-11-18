@@ -1,8 +1,9 @@
 import re
 from typing import List, TypedDict
 
-from books.common import hex_to_rgba, invert_color
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
+
+from python.common import hex_to_rgba, invert_color
 
 
 class OnomatopoeiaInstruction(TypedDict):

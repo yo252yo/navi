@@ -2,9 +2,10 @@ import math
 import subprocess
 from typing import cast
 
-from books.common import print_confirmation
 from PIL import Image
 from reportlab.pdfgen import canvas
+
+from python.common import print_confirmation
 
 BLEED_IN=0.125
 PAGE_WIDTH_IN=8.25
