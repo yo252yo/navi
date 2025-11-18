@@ -118,17 +118,47 @@ class ComicReader {
 // Global function to populate pages and initialize reader
 let readerInstance;
 
-function populate_pages(count) {
+function populate_pages() {
     if (!readerInstance) {
         readerInstance = new ComicReader();
     }
-    // Generate the page list from count
-    const pages = [];
-    for (let i = 0; i < count; i++) {
-        pages.push(i === 0 ? 'wide_pages/cover.png' : `wide_pages/p${i}.png`);
-    }
-    readerInstance.setPages(pages);
-    readerInstance.init();
+
+    // Auto-discover pages by trying to load images until one fails
+    const pages = ['wide_pages/cover.png'];
+    let currentIndex = 1;
+    let attemptsRemaining = 50; // Safety limit to prevent infinite loops
+
+    const tryLoadPage = (pageIndex) => {
+        const img = new Image();
+        const pagePath = `wide_pages/p${pageIndex}.png`;
+
+        img.onload = () => {
+            // Page exists, add it and try the next one
+            pages.push(pagePath);
+            if (attemptsRemaining > 0) {
+                attemptsRemaining--;
+                tryLoadPage(pageIndex + 1);
+            } else {
+                // Safety limit reached
+                finishLoading();
+            }
+        };
+
+        img.onerror = () => {
+            // Page doesn't exist, stop here
+            finishLoading();
+        };
+
+        img.src = pagePath;
+    };
+
+    const finishLoading = () => {
+        readerInstance.setPages(pages);
+        readerInstance.init();
+    };
+
+    // Start by trying to load page 1 (p1.png)
+    tryLoadPage(currentIndex);
 }
 
 // Initialize the reader when the page loads (only if no populate_pages was called)
@@ -136,5 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!readerInstance) {
         readerInstance = new ComicReader();
         readerInstance.init();
+        populate_pages();
     }
 });
