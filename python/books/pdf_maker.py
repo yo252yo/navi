@@ -61,9 +61,16 @@ def make_pages_for_cover(path: str) -> None:
     save_pdf(img, full_cover_pdf, width=int(2.01 * PAGE_WIDTH))  # 0.01 for the edge
     save_pdf(left_page, back_cover_pdf)
     save_pdf(right_page, front_cover_pdf)
+
+    # Create thumbnail from front cover image
+    thumbnail = right_page.resize((256, 256), Image.Resampling.LANCZOS)
+    thumbnail_path = f"{path}/thumbnail.png"
+    thumbnail.save(thumbnail_path)
+
     print_confirmation(full_cover_pdf)
     print_confirmation(back_cover_pdf)
     print_confirmation(front_cover_pdf)
+    print_confirmation(thumbnail_path)
 
 def make_page_from_image(input_png: str, output_pdf: str) -> None:
     img = cast(Image.Image, Image.open(input_png))
