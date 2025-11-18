@@ -1,0 +1,7 @@
+Buddha the Llama
+BUDDHISM is a philosophy\ndeveloped by SIDDHARTHA GAUTAMA,\nwho gave up being a prince\nwhen he saw the pain of his people.\nHis thinking is based on the FOUR NOBLE TRUTHS:\n- Yes, suffering exists.\n- It has a clear cause.\n- But it can also end.\n- Therefore there is a way to reach that end.
+title_color=#ffffff
+author_color=#000000
+subtitle_color=#000000
+summary_color=#000000
+title_y=40

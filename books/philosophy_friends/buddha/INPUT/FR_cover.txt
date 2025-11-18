@@ -1,0 +1,7 @@
+Bouddha le Lama
+Le BOUDDHISME est une philosophie\ndéveloppée par SIDDHARTA GAUTAMA,\nqui abandonna son rôle de prince\nface à la douleur de son peuple.\nSa pensée se base sur les QUATRE NOBLES VÉRITÉS:\n- Oui, la souffrance existe.\n- Elle a une cause bien définie.\n- Mais elle a aussi une fin.\n- Il y a donc une façon d'arriver à cette fin.
+title_color=#ffffff
+author_color=#000000
+subtitle_color=#000000
+summary_color=#000000
+title_y=40

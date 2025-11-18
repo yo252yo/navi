@@ -1,0 +1,6 @@
+Zizek the Fennec
+SLAVOJ ŽIŽEK is a Slovenian philosopher known for\nthe idea of “SURPLUS ENJOYMENT.”\nThese big words refer to a little invisible bonus\nthat ads and products give us,\nlike a trash can that says nice things\nor clothes that make us look cool.\nThese things answer our hidden needs\nwithout us noticing.\nWe must be very careful because this invisible trick controls us without us knowing it.
+title_color=#f29448
+author_color=#ffffff
+subtitle_color=#ffffff
+summary_color=#ffffff

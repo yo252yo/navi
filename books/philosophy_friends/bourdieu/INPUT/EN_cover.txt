@@ -1,0 +1,6 @@
+Bourdieu the Eel
+PIERRE BOURDIEU is a French sociologist known for the idea of CULTURAL CAPITAL.\nHe shows that it’s not only money that separates rich and poor people.\nThese inequalities are made stronger by many hidden things:\nyour tastes, your manners, the way you speak, the books you’ve read, or even the people you know...\nThey form an invisible “capital” that causes many kinds of DISCRIMINATION.
+title_color=#9f4f0c
+author_color=#ffffff
+subtitle_color=#ffffff
+summary_color=#ffffff

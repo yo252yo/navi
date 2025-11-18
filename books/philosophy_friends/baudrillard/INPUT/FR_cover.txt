@@ -1,0 +1,7 @@
+Baudrillard le Canard
+JEAN BAUDRILLARD est un sociologue français connu pour ses travaux sur les SIMULACRES.\nLa technologie et la publicité ont rempli notre monde d’images de plus en plus détaillées. \nIl montre que les effets de ces représentations sont bien concrets, tant et si bien que les apparences importent souvent plus que la réalité.\nC’est pourquoi il dit qu’elles sont encore\nplus réelles que le réel.\nC’est ce qu’il appelle HYPERREALITÉ, un monde où c’est la SÉDUCTION des images qui mène la danse.
+title_color=#f3c14b
+author_color=#ffffff
+subtitle_color=#ffffff
+summary_color=#ffffff
+title_y=80

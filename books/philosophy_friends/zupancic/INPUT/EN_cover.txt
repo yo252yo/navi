@@ -1,0 +1,7 @@
+Zupanzik the Big Tick
+ALENKA ZUPANČIČ is a Slovenian philosopher who studied DISAVOWAL.\nThat’s what she calls the act of doing something\nwe know very well we shouldn’t do.\nShe says that because we know it’s wrong, we think we can control the risk, and that gives us an excuse to do it anyway, like the big tick, or pollution.\nThis false feeling makes us careless, and that’s even more dangerous.
+title_color=#bfc013
+author_color=#000000
+subtitle_color=#000000
+summary_color=#ffffff
+title_size=100

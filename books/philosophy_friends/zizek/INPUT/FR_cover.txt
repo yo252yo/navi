@@ -1,0 +1,6 @@
+Zizek le Fennec
+SLAVOJ ŽIŽEK est un philosophe slovène connu pour\nle concept de “SURPLUS DE JOUISSANCE”.\nCes mots compliqués désignent un petit bonus invisible\nque nous donnent les publicités et marchandises,\ncomme les compliments de la poubelle\nou des vêtements qui nous donnent l’air cool.\nCes choses répondent à nos besoins cachés\nsans qu’on s’en rende compte.\nIl faut faire très attention car ce mécanisme invisible nous manipule inconsciemment.
+title_color=#f29448
+author_color=#ffffff
+subtitle_color=#ffffff
+summary_color=#ffffff

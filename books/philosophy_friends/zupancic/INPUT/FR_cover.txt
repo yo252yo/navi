@@ -1,0 +1,7 @@
+Zupanzik la Grosse Tique
+ALENKA ZUPANČIČ est une philosophe slovéne qui a travaillé sur le DÉSAVEU.\nC’est comme ça qu'elle appelle ce phénomène de faire quelque chose dont on sait très bien qu’on ne devrait pas faire.\nElle dit que comme on sait que c’est mal, on croit maîtriser le risque et ça nous donne une excuse pour le faire quand même, comme la grosse tique ou la pollution.\nCette fausse impression nous rend imprudent et c’est encore plus dangereux.
+title_color=#bfc013
+author_color=#000000
+subtitle_color=#000000
+summary_color=#ffffff
+title_size=100

@@ -1,0 +1,8 @@
+Baudrillard the Mallard
+JEAN BAUDRILLARD is a French thinker known for his work on SIMULACRA.\nTechnology and advertising have filled our world with more and more detailed images.\nHe shows that these pictures have real effects, so much so that appearances often matter more than reality.\nThat’s why he says they are even\nmore real than the real.\nHe calls this HYPERREALITY, a world where the SEDUCTION of images wins the show.
+title_color=#f3c14b
+author_color=#ffffff
+subtitle_color=#ffffff
+summary_color=#ffffff
+title_y=80
+title_size=100

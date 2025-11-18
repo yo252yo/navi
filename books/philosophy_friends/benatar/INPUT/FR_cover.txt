@@ -1,0 +1,9 @@
+Benatar le Jaguar
+DAVID BENATAR est un philosophe sud-africain qui analyse la différence entre le plaisir et la douleur.\nL’absence de douleur est quelque chose de positif,\nmais l’absence de plaisir n’est pas mauvaise, elle est neutre: c'est ce qu'il appelle l'ASYMÉTRIE.\nIl conclut qu’il vaut mieux éviter les expériences qui peuvent être négatives,\nmême si elles peuvent aussi être positives.
+title_color=#eca862
+author_color=#ffffff
+subtitle_color=#ffffff
+summary_color=#000000
+subtitle_y=200
+author_y=140
+title_y=100

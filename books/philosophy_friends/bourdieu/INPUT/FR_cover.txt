@@ -1,0 +1,6 @@
+Bourdieu l'Anguille
+PIERRE BOURDIEU est un sociologue français connu pour la notion de CAPITAL CULTUREL.\nIl montre que ce n’est pas seulement la richesse matérielle qui sépare les gens riches et pauvres.\nCes inégalités sont renforcées par de nombreuses choses implicites:\ntes goûts, tes manières, le langage que tu emploies, les livres que tu as lu ou même les gens que tu connais…\nElles constituent un “capital” invisible qui est la source de nombreuses DISCRIMINATIONS.
+title_color=#9f4f0c
+author_color=#ffffff
+subtitle_color=#ffffff
+summary_color=#ffffff

@@ -1,2 +1,7 @@
 *.code-workspace
 OLD
+
+books/*/*/*/ebook.pdf
+books/*/*/*/cover.pdf
+books/*/*/*/inside.pdf
+books/*/*/*/*/*.pdf
