@@ -5,3 +5,6 @@ books/*/*/*/ebook.pdf
 books/*/*/*/cover.pdf
 books/*/*/*/inside.pdf
 books/*/*/*/*/*.pdf
+
+python/__pycache__
+python/.venv
