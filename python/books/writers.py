@@ -1,7 +1,7 @@
 import re
 from typing import List, TypedDict
 
-from common import hex_to_rgba, invert_color
+from books.common import hex_to_rgba, invert_color
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 

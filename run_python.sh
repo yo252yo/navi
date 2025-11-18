@@ -1,4 +1,4 @@
 #!/bin/bash
 
-source python/.venv/bin/activate
+source .venv/bin/activate
 python python/main.py

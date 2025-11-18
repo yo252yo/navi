@@ -1,15 +1,16 @@
 import os
 from typing import IO, List, Tuple, cast
 
-from common import print_confirmation
-from pdf_maker import (BLACK_PAGE, compress_pdf, mage_pages_from_large_image,
-                       make_page_from_image, make_pages_for_cover)
+from books.common import print_confirmation
+from books.pdf_maker import (BLACK_PAGE, compress_pdf,
+                             mage_pages_from_large_image, make_page_from_image,
+                             make_pages_for_cover)
+from books.writers import (OnomatopoeiaInstruction, write_author,
+                           write_centered_text, write_legalese_bottomleft,
+                           write_onomatopae_text, write_subtitle,
+                           write_summary, write_title)
 from PIL import Image
 from pypdf import PdfWriter
-from writers import (OnomatopoeiaInstruction, write_author,
-                     write_centered_text, write_legalese_bottomleft,
-                     write_onomatopae_text, write_subtitle, write_summary,
-                     write_title)
 
 IMAGE_DIMENSIONS = (2048, 1024)
 

@@ -2,7 +2,7 @@ import math
 import subprocess
 from typing import cast
 
-from common import print_confirmation
+from books.common import print_confirmation
 from PIL import Image
 from reportlab.pdfgen import canvas
 
