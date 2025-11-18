@@ -25,11 +25,11 @@ class ComicReader {
         toggleContainer.className = 'mode-toggle';
 
         const galleryBtn = document.createElement('button');
-        galleryBtn.textContent = 'Gallery View';
+        galleryBtn.textContent = 'Gallery';
         galleryBtn.className = `mode-btn ${this.currentMode === 'gallery' ? 'active' : ''}`;
 
         const singleBtn = document.createElement('button');
-        singleBtn.textContent = 'Page View';
+        singleBtn.textContent = 'Pages';
         singleBtn.className = `mode-btn ${this.currentMode === 'single' ? 'active' : ''}`;
 
         galleryBtn.onclick = () => this.switchMode('gallery');
